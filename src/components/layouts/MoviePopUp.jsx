@@ -1,27 +1,32 @@
 import React, { Component } from "react";
 
 class MoviePopUp extends Component {
-  handleClick = () => {
+  handleClose = () => {
     this.props.togglePop();
   };
+
   render() {
-    const { title, vote, overview, image } = this.props;
+    const { title, vote, overview, image, release_date, id } = this.props;
     return (
       <>
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={this.handleClick}>
+            <span className="close" onClick={this.handleClose}>
               &times;
             </span>
             <div className="popup-image">
               <img src={image} alt="{title}" />
             </div>
             <div className="content">
-              <h1>{title}</h1>
-              <h3>
-                ( {vote}
+              <div className="d-flex">
+                <p>{release_date}</p>
+                {/* <i class="fas fa-heart"></i> */}
+                <i class="far fa-heart"></i>
+              </div>
+              <h1>
+                {title} ( {vote}
                 <i class="fas fa-star"></i> )
-              </h3>
+              </h1>
               <p>{overview}</p>
             </div>
           </div>

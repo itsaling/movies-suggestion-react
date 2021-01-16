@@ -1,6 +1,6 @@
 $color-primary: #0c1014;
 $color-secondary: #f35e84;
-$color-gradient: linear-gradient(to right, #f35e84, #513bff, #23bffd, #9bf9ce);
+$color-gradient: linear-gradient(to right, #f35e84, #513bff);
 $color-light: #fff;
 
 $font-primary: "Montserrat", sans-serif;
@@ -25,16 +25,16 @@ $screen-xl-max: 5000px;
   padding: 0;
   box-sizing: border-box;
 }
+.header {
+  font-weight: 700;
+  margin-left: 1em;
+}
 body {
   background: $color-primary;
   color: $color-light;
   font-family: $font-primary;
   margin: 0;
   box-sizing: border-box;
-  h1 h2 h3 {
-    font-family: $font-primary;
-    font-weight: 900;
-  }
   nav {
     margin: 0 1em;
 
@@ -59,18 +59,27 @@ body {
     margin: 10px 0;
     padding: 2em;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
     .card {
       background-color: transparent;
       display: flex;
+      margin-bottom: 30px;
       justify-content: center;
       transition: all 0.35s ease-in-out;
       .card-img-top {
         border-radius: 20px;
       }
+      i{
+        margin-bottom: -30px;
+        z-index: 100;
+        text-align: left;
+        margin-left: 10px;
+        font-size: 20px;
+      }
       .card-title {
         font-weight: 900;
+        font-size: 1.3rem;
       }
       .card-vote {
         position: relative;
@@ -111,6 +120,7 @@ body {
   background-color: #0000009d;
   .close {
     text-align: right;
+    cursor: pointer;
     margin-right: 17px;
     margin-bottom: -33px;
     font-size: 2em;
@@ -154,6 +164,18 @@ body {
     }
     .content {
       padding: 1em 2em;
+      text-align: left;
+      .d-flex{
+        justify-content: space-between;
+        i{
+          font-size: 30px;
+          cursor: pointer;
+          transition: .1s all ease-in;
+          &:hover{
+            transform: scale(.9);
+          }
+        }
+      }
     }
   }
 }

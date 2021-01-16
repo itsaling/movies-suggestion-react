@@ -6,7 +6,6 @@ class Movies extends Component {
     return this.props.movies.map((movie) => (
       <MovieItem key={movie.id} movie={movie} />
     ));
-    // return this.props.movies.map((movie) => <h1>{movie.original_title}</h1>);
   }
 }
 
