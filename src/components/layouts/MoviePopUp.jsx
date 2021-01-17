@@ -5,6 +5,10 @@ class MoviePopUp extends Component {
     this.props.togglePop();
   };
 
+  handleFavor = () => {
+    this.props.toggleFavor();
+  };
+
   render() {
     const { title, vote, overview, image, release_date, id } = this.props;
     return (
@@ -20,8 +24,12 @@ class MoviePopUp extends Component {
             <div className="content">
               <div className="d-flex">
                 <p>{release_date}</p>
-                {/* <i class="fas fa-heart"></i> */}
-                <i class="far fa-heart"></i>
+
+                {this.props.favor === true ? (
+                  <i className="fa fa-heart" onClick={this.handleFavor}></i>
+                ) : (
+                  <i className="far fa-heart" onClick={this.handleFavor}></i>
+                )}
               </div>
               <h1>
                 {title} ( {vote}

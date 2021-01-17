@@ -29,11 +29,6 @@ class App extends Component {
       .then((res) => this.setState({ nowPlaying: res.data.results }));
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}`
-      )
-      .then((res) => this.setState({ topRated: res.data.results }));
-    axios
-      .get(
         `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}`
       )
       .then((res) => this.setState({ upcoming: res.data.results }));
@@ -48,14 +43,17 @@ class App extends Component {
       )
       .then((res) => this.setState({ trending: res.data.results }));
   }
-  // addToFavorites = (favorite) => {
-  //   const { favorites } = this.state;
-  //   if (
-  //     !favorites.some((alreadyFavorite) => alreadyFavorite.id == favorite.id)
-  //   ) {
-  //     this.setState({ favorites: [...this.state.favorites, favorite] });
-  //   }
-  // };
+
+  handleFavorite = (id) => {
+    const favoriteMovies = this.state.movies.map((movie) => {
+      if (movie.id === id) movie.isFavorite = !movie.isFavorite;
+      return movie;
+    });
+    this.setState({
+      movies: favoriteMovies,
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -70,7 +68,10 @@ class App extends Component {
                   <h2 className="header">Trending</h2>
                 </div>
                 <div className="card-deck text-center">
-                  <Movies movies={this.state.trending} />
+                  <Movies
+                    movies={this.state.trending}
+                    handleFavorite={this.handleFavorite}
+                  />
                 </div>
                 <div className="container-fluid mt-4">
                   <h2 className="header">Popular Movies</h2>
@@ -115,19 +116,6 @@ class App extends Component {
                 </div>
                 <div className="card-deck text-center">
                   <Movies movies={this.state.nowPlaying} />
-                </div>
-              </>
-            )}
-          ></Route>
-          <Route
-            path="/top-rated"
-            render={(props) => (
-              <>
-                <div className="container-fluid mt-4">
-                  <h2 className="header">Top Rated</h2>
-                </div>
-                <div className="card-deck text-center">
-                  <Movies movies={this.state.topRated} />
                 </div>
               </>
             )}

@@ -5,10 +5,17 @@ import moment from "moment";
 class MovieItem extends Component {
   state = {
     seen: false,
+    favor: false,
   };
   togglePop = () => {
     this.setState({
       seen: !this.state.seen,
+    });
+  };
+
+  toggleFavor = () => {
+    this.setState({
+      favor: !this.state.favor,
     });
   };
   render() {
@@ -25,10 +32,17 @@ class MovieItem extends Component {
     } = this.props.movie;
 
     const imgPath = "https://image.tmdb.org/t/p/w500";
+    console.log(this.state.favor);
+
     return (
       <>
         <div className="card">
-          <i class="far fa-heart" onClick={() => this.addToFavorites(id)}></i>
+          {this.state.favor === true ? (
+            <i className="fa fa-heart" onClick={this.toggleFavor}></i>
+          ) : (
+            <i className="far fa-heart" onClick={this.toggleFavor}></i>
+          )}
+
           <img
             className="card-img-top"
             src={
@@ -57,6 +71,8 @@ class MovieItem extends Component {
         {this.state.seen ? (
           <MoviePopUp
             togglePop={this.togglePop}
+            toggleFavor={this.toggleFavor}
+            favor={this.state.favor}
             title={original_title ? original_title : original_name}
             vote={vote_average}
             image={`${imgPath}${backdrop_path}`}
